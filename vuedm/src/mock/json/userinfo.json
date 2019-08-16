@@ -1,0 +1,150 @@
+[  
+    {  
+        "id": 1,  
+        "name": "心理沙龙",  
+        "material": "心理沙龙活动证明",  
+        "volunteer_prove": "abcd.zip",
+        "activity_prove": "hijk.zip"
+    },  
+    {  
+        "id": 2,  
+        "name": "数信党务换届大会",  
+        "material": "换届大会活动证明",  
+        "volunteer_prove": "hld.zip",
+        "activity_prove": "hfjekr.zip"  
+    },  
+    {  
+        "id": 3,  
+        "name": "团学换届大会",  
+        "material": "团学换届大会活动证明",  
+        "volunteer_prove": "otu.zip",
+        "activity_prove": "wqerwq.zip"  
+    },  
+    {  
+        "id": 4,  
+        "name": "党务调研大赛",  
+        "material": "党务调研大赛活动证明",  
+        "volunteer_prove": "fewrf.zip",
+        "activity_prove": "fdsf.zip"  
+    },  
+    {  
+        "id": 5,  
+        "name": "辩论赛",  
+        "material": "辩论赛活动证明",  
+        "volunteer_prove": "fdfs.zip",
+        "activity_prove": "tyytyr.zip"  
+    },  
+    {  
+        "id": 6,  
+        "name": "党知识竞赛",  
+        "material": "党知识竞赛活动证明",  
+        "volunteer_prove": "jyr.zip",
+        "activity_prove": "bgre.zip"
+    },  
+    {  
+        "id": 7,  
+        "name": "学院有约",  
+        "material": "学院有约活动证明",  
+        "volunteer_prove": "jkflejw.zip",
+        "activity_prove": "jfle.zip"  
+    },  
+    {  
+        "id": 8,  
+        "name": "团知识竞赛",  
+        "material": "团知识竞赛活动证明",  
+        "volunteer_prove": "kuyki.zip",
+        "activity_prove": "mhhk.zip"  
+    },  
+    {  
+        "id": 9,  
+        "name": "心理知识竞赛",  
+        "material": "心理知识竞赛活动证明",  
+        "volunteer_prove": "lkj.zip",
+        "activity_prove": "fwr.zip"  
+    },  
+    {  
+        "id": 10,  
+        "name": "艺术大赛",  
+        "material": "艺术大赛活动证明",  
+        "volunteer_prove": "hhh.zip",
+        "activity_prove": "fwe.zip"  
+    },  
+    {  
+        "id": 11,  
+        "name": "书法比拼",  
+        "material": "书法比拼活动证明",  
+        "volunteer_prove": "cxzds.zip",
+        "activity_prove": "xzdw.zip"  
+    },  
+    {  
+        "id": 12,  
+        "name": "朗诵对对碰",  
+        "material": "朗诵对对碰活动证明",  
+        "volunteer_prove": "dfew.zip",
+        "activity_prove": "☀rhgtr.zip"  
+    },  
+    {  
+        "id": 13,  
+        "name": "写作begin",  
+        "material": "写作begin活动证明",  
+        "volunteer_prove": "jlie.zip",
+        "activity_prove": "ewrg.zip" 
+    },  
+    {  
+        "id": 14,  
+        "name": "角色扮演大赛",  
+        "material": "角色扮演大赛活动证明",  
+        "volunteer_prove": "fewrewrf.zip",
+        "activity_prove": "fdsee.zip" 
+    },  
+    {  
+        "id": 15,  
+        "name": "团日活动",  
+        "material": "团日活动活动证明",  
+        "volunteer_prove": "csfe.zip",
+        "activity_prove": "jlj.zip"  
+    },  
+    {  
+        "id": 16,  
+        "name": "音乐节",  
+        "material": "音乐节活动证明",  
+        "volunteer_prove": "nim.zip",
+        "activity_prove": "cjdie.zip"  
+    },  
+    {  
+        "id": 17,  
+        "name": "绘画大赛",  
+        "material": "绘画大赛活动证明",  
+        "volunteer_prove": "cjei.zip",
+        "activity_prove": "fjeki.zip"  
+    },  
+    {  
+        "id": 18,  
+        "name": "acm讲座",  
+        "material": "acm讲座活动证明",  
+        "volunteer_prove": "cjke.zip",
+        "activity_prove": "kdie.zip"  
+    },  
+    {  
+        "id": 19,  
+        "name": "血液讲座",  
+        "material": "血液讲座活动证明",  
+        "volunteer_prove": "fjei.zip",
+        "activity_prove": "mhljihk.zip"  
+    },  
+    {  
+        "id": 20,  
+        "name": "宿舍检查",  
+        "material": "宿舍检查活动证明",  
+        "volunteer_prove": "jkli.zip",
+        "activity_prove": "fdfe.zip" 
+    },
+    
+    {  
+        "id": 21,  
+        "name": "校长有约",  
+        "material": "校长有约活动证明",  
+        "volunteer_prove": "cmi.zip",
+        "activity_prove": "mhhferk.zip"  
+    }  
+]
