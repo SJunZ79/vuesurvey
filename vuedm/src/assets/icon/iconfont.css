@@ -1,0 +1,57 @@
+@font-face {font-family: "fontReg";
+  src: url('iconfont.eot?t=1565851356954'); /* IE9 */
+  src: url('iconfont.eot?t=1565851356954#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,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') format('woff2'),
+  url('iconfont.woff?t=1565851356954') format('woff'),
+  url('iconfont.ttf?t=1565851356954') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1565851356954#fontReg') format('svg'); /* iOS 4.1- */
+}
+
+.fontReg {
+  font-family: "fontReg" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.regxueyuan:before {
+  content: "\e62e";
+}
+
+.regyouxiang:before {
+  content: "\e673";
+}
+
+.regbumen:before {
+  content: "\e6ae";
+}
+
+.regyanzhengma:before {
+  content: "\e68a";
+}
+
+.regmima:before {
+  content: "\e64c";
+}
+
+.regmimaqueren:before {
+  content: "\e645";
+}
+
+.reguser-fill:before {
+  content: "\e60b";
+}
+
+.regyonghuleixing:before {
+  content: "\e628";
+}
+
+.regshequ-jihuo:before {
+  content: "\e609";
+}
+
+.regshequ-weijihuo:before {
+  content: "\e60a";
+}
+
