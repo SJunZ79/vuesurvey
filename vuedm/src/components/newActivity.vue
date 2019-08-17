@@ -103,8 +103,7 @@ export default {
       axios.post('/user/newActivity',{
         name: this.ruleForm.name,
         region: this.ruleForm.region,
-        date1: this.ruleForm.date1,
-        date2: this.ruleForm.date2,
+        time: this.ruleForm.date1 + this.ruleForm.date2,
         desc: this.ruleForm.desc
       }).then(response => {
         response = this.ruleForm;

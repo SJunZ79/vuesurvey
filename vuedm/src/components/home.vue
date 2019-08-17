@@ -87,7 +87,7 @@ export default {
       this.currentPage = currentPage;
     },
     getData() {
-      axios.get("/user/userInfo").then(
+      axios.get("/admin/activity/getAllActivity").then(
         response => {
           console.log(response.data);
           this.tableData = response.data
@@ -96,6 +96,18 @@ export default {
           console.log("error");
         }
       );
+    },
+    postData() {
+      axios.post('admin/file/get',{
+        material: this.tableData.material,
+        volunteer_prove: this.tableData.volunteer_prove,
+        activity_prove: this.tableData.activity_prove
+      }).then(response => {
+        response = this.tableData;
+        console.log(response);
+      }).catch(function(error){
+        console.log(error);
+      });
     },
     //每页下拉显示数据
     handleSizeChange: function(size) {
@@ -110,6 +122,7 @@ export default {
   },
   mounted() {
     this.getData();
+    this.postData();
   }
 };
 </script>
