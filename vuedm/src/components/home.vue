@@ -12,7 +12,7 @@
           <el-table-column prop="id" label="序号" width="80"></el-table-column>
           <el-table-column prop="name" label="活动名称" width="180"></el-table-column>
           <el-table-column prop="material" label="活动材料" width="220"></el-table-column>
-          <el-table-column prop="volunteer_prove" label="志愿时文档" width="180"></el-table-column>
+          <el-table-column prop="volunteer_time" label="志愿时文档" width="180"></el-table-column>
           <el-table-column prop="activity_prove" label="活动分文档" width="180"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope class="text-decoration">
@@ -46,6 +46,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "list11",
   data() {
@@ -90,36 +91,50 @@ export default {
       axios.get("/api/admin/activity/getAllActivity").then(
         response => {
           console.log(response.data);
-          this.tableData = response.data
+          this.tableData = response.data.activities;
         },
         response => {
           console.log("error");
         }
       );
+      for (var i = 0; i < this.tableData.length; i++) {
+        axios
+          .post("/api/admin/file/get", {
+            uuid: this.tableData[i].material
+          })
+          .then(response => {
+            this.tableData[i].material = response.data.name;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+      for (var j = 0; j < this.tableData.length; j++) {
+        axios
+          .post("/api/admin/file/get", {
+            uuid: this.tableData[j].volunteer_time
+          })
+          .then(response => {
+            this.tableData[j].volunteer_time = response.data.name;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+      for (var k = 0; k < this.tableData.length; k++) {
+        axios
+          .post("/api/admin/file/get", {
+            uuid: this.tableData[k].activity_prove
+          })
+          .then(response => {
+            this.tableData[k].activity_prove = response.data.name;
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
     },
-    postData() {
-      axios.post('/api/admin/file/get',{
-        material: this.tableData.material,
-        volunteer_prove: this.tableData.volunteer_prove,
-        activity_prove: this.tableData.activity_prove
-      }).then(response => {
-        response = this.tableData;
-        console.log(response);
-      }).catch(function(error){
-        console.log(error);
-      });
-    },
-    getthree() {
-      axios.get("/api/admin/file/get").then(
-        response => {
-          console.log(response.data);
-          this.tableData = response.data;
-        },
-        response => {
-          console.log(error);
-        }
-      );
-    },
+    
     //每页下拉显示数据
     handleSizeChange: function(size) {
       this.pagesize = size;
