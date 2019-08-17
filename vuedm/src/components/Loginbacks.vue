@@ -74,19 +74,19 @@
     data() {
       return {
         options: [{
-          value: '0',
+          value: 0,
           label: '管理员'
         }, {
-          value: '1',
+          value: 1,
           label: '组织'
         }, {
-          value: '2',
+          value: 2,
           label: '部门'
         }, {
-          value: '3',
+          value: 3,
           label: '学生'
         }, {
-          value: '4',
+          value: 4,
           label: '老师'
         }],
         user: {
@@ -126,7 +126,7 @@
           return;
         } else {
           // 接口
-          console.log(this.user.type);
+          console.log(this.user);
           axios.post("/api/checkCode", {
             code: this.user.code
           })
@@ -142,11 +142,11 @@
                     code: this.user.code
                   })
                   .then(res => {
-                    if (res.data.status === "500") {
-                      this.$router.push('/helloWorld');
-                    } else if (res.data.status === "401") {
-                      this.$message.error("账号密码错误！");
-                      this.$router.push('/loginbacks');
+                    if (res.data.status === "101") {
+                      this.$message.success("登录成功！");
+                      this.$router.push('/home');
+                    } else  {
+                      this.$message.error("登录失败，请重试！");
                     }
                   });
               }
