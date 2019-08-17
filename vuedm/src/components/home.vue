@@ -109,6 +109,17 @@ export default {
         console.log(error);
       });
     },
+    getthree() {
+      axios.get("/api/admin/file/get").then(
+        response => {
+          console.log(response.data);
+          this.tableData = response.data;
+        },
+        response => {
+          console.log(error);
+        }
+      );
+    },
     //每页下拉显示数据
     handleSizeChange: function(size) {
       this.pagesize = size;
@@ -123,6 +134,7 @@ export default {
   mounted() {
     this.getData();
     this.postData();
+    this.getthree();
   }
 };
 </script>

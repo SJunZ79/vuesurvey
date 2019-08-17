@@ -77,7 +77,7 @@ export default {
       this.$refs[formName].resetFields();
     },
     function1() {
-      axios.get("/user/userInfo").then(
+      axios.get("/api/admin/activity/upload").then(
         response => {
           console.log(response.data);
           this.data = response.data;
