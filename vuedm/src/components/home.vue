@@ -148,8 +148,7 @@ export default {
   },
   mounted() {
     this.getData();
-    this.postData();
-    this.getthree();
+    
   }
 };
 </script>
