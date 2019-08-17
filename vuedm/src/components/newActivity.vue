@@ -100,10 +100,10 @@ export default {
     },
 
     postData() {
-      axios.post('/user/newActivity',{
+      axios.post('/api/admin/activity/upload',{
         name: this.ruleForm.name,
         region: this.ruleForm.region,
-        time: this.ruleForm.date1 + this.ruleForm.date2,
+        time: this.ruleForm.date1,
         desc: this.ruleForm.desc
       }).then(response => {
         response = this.ruleForm;

@@ -87,7 +87,7 @@ export default {
       this.currentPage = currentPage;
     },
     getData() {
-      axios.get("/admin/activity/getAllActivity").then(
+      axios.get("/api/admin/activity/getAllActivity").then(
         response => {
           console.log(response.data);
           this.tableData = response.data
@@ -98,7 +98,7 @@ export default {
       );
     },
     postData() {
-      axios.post('admin/file/get',{
+      axios.post('/api/admin/file/get',{
         material: this.tableData.material,
         volunteer_prove: this.tableData.volunteer_prove,
         activity_prove: this.tableData.activity_prove

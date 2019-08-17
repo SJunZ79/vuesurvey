@@ -8,7 +8,7 @@
             <el-avatar icon="el-icon-user-solid"></el-avatar>
             <i class="el-icon-arrow-down"></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>返回首页</el-dropdown-item>
+              <el-dropdown-item @click="fanhui()">返回首页</el-dropdown-item>
               <el-dropdown-item>退出</el-dropdown-item>
             </el-dropdown-menu>
           </span>
@@ -133,6 +133,9 @@ export default {
         });
       }
       return extension || (extension2 && isLt2M);
+    },
+    fanhui(){
+      this.$router.push({ path: '/' }) 
     }
   }
 };

@@ -8,7 +8,7 @@
             <el-avatar icon="el-icon-user-solid"></el-avatar>
             <i class="el-icon-arrow-down"></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>返回首页</el-dropdown-item>
+              <el-dropdown-item @click="fanhui()">返回首页</el-dropdown-item>
               <el-dropdown-item>退出</el-dropdown-item>
             </el-dropdown-menu>
           </span>
@@ -63,6 +63,9 @@ export default {
         width = img.width + 40;
       }
       this.width = width + "px";
+    },
+    fanhui(){
+      this.$router.push({ path: '/' }) 
     }
   }
 };

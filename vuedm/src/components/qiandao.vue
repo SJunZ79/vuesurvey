@@ -90,7 +90,7 @@ export default {
     sendData() {
       var activity_id = document.getElementById("sel").value;
       axios
-        .post("/user/qiandao", {
+        .post("/api/admin/signed/create", {
           activity_id: this.activity_id,
           date2: this.qianForm.date2 *60,
           url: "http://localhost:8080/code"
