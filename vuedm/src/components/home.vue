@@ -47,6 +47,7 @@
 <script>
 import axios from "axios";
 
+
 export default {
   name: "list11",
   data() {
@@ -87,12 +88,22 @@ export default {
     current_change: function(currentPage) {
       this.currentPage = currentPage;
     },
+    async subData() {
+      try {
+        const initRes = await this.getData();
+        const subRes = await this.postData1();
+        const thirRes = await this.postData2();
+        const res = await this.postData3();
+      } catch (error) {
+        console.log(error);
+      }
+    },
     getData() {
       axios.get("/api/admin/activity/getAllActivity").then(
         response => {
           if (response.data.status === "403") {
             this.$message.error("用户未登录！");
-            this.$router.push("/loginbacks");
+            this.$router.push("/");
           } else {
             console.log(response.data);
             this.tableData = response.data.activities;
@@ -102,6 +113,8 @@ export default {
           console.log("error");
         }
       );
+    },
+    postData1() {
       for (var i = 0; i < this.tableData.length; i++) {
         axios
           .get("/api/admin/activity/file/get", {
@@ -116,6 +129,8 @@ export default {
             console.log(error);
           });
       }
+    },
+    postData2() {
       for (var j = 0; j < this.tableData.length; j++) {
         axios
           .get("/api/admin/activity/file/get", {
@@ -130,6 +145,8 @@ export default {
             console.log(error);
           });
       }
+    },
+    postData3() {
       for (var k = 0; k < this.tableData.length; k++) {
         axios
           .get("/api/admin/activity/file/get", {
@@ -158,7 +175,7 @@ export default {
     }
   },
   mounted() {
-    this.getData();
+    this.subData();
   }
 };
 </script>

@@ -15,27 +15,32 @@ export default new Router({
   mode: "history",
   routes: [
     {
-      path: '/',
+      path:'/',
+      name:'Loginbacks',
+      component: Loginbacks
+    },
+    {
+      path: '/HelloWorld',
       name: 'HelloWorld',
       component: HelloWorld,
       children:[
         {
-          path:'/home',
+          path:'/HelloWorld/home',
           name:'home',
           component: () => import('@/components/home'),
         },
         {
-          path:'/nacty',
+          path:'/HelloWorld/nacty',
           name:'newActivity',
           component: () => import('@/components/newActivity'),
         },
         {
-          path:'/qiandao',
+          path:'/HelloWorld/qiandao',
           name:'qiandao',
           component: () => import('@/components/qiandao'),
         },
         {
-          path:'/qingk',
+          path:'/HelloWorld/qingk',
           name:'qingk',
           component: () => import('@/components/qingk'),
         }
@@ -73,10 +78,6 @@ export default new Router({
       component: Activate
     },
     {
-      path: '/loginbacks',
-      name: 'Loginbacks',
-      component: Loginbacks,
-    },{
       path: '/frontActivate',
       name: 'FrontActivate',
       component: FrontActivate,
