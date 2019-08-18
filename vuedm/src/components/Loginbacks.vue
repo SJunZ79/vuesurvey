@@ -144,7 +144,7 @@
                   .then(res => {
                     if (res.data.status === "101") {
                       this.$message.success("登录成功！");
-                      this.$router.push('/home');
+                      this.$router.push('/HelloWorld');
                     } else  {
                       this.$message.error("登录失败，请重试！");
                     }
