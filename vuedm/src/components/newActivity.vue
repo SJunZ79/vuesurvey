@@ -106,8 +106,12 @@ export default {
         time: this.ruleForm.date1,
         desc: this.ruleForm.desc
       }).then(response => {
-        response = this.ruleForm;
-        console.log(response);
+        if(response.data.status === 200){
+          console.log(response.data);
+          this.$message.success("请求成功！");
+        }else{
+          this.$message.error("请求失败！");
+        }
       }).catch(function (error){
         console.log(error);
       });

@@ -90,8 +90,13 @@ export default {
     getData() {
       axios.get("/api/admin/activity/getAllActivity").then(
         response => {
-          console.log(response.data);
-          this.tableData = response.data.activities;
+          if (response.data.status === "403") {
+            this.$message.error("用户未登录！");
+            this.$router.push("/loginbacks");
+          } else {
+            console.log(response.data);
+            this.tableData = response.data.activities;
+          }
         },
         response => {
           console.log("error");
@@ -99,7 +104,7 @@ export default {
       );
       for (var i = 0; i < this.tableData.length; i++) {
         axios
-          .post("/api/admin/file/get", {
+          .get("/api/admin/activity/file/get", {
             uuid: this.tableData[i].material
           })
           .then(response => {
@@ -111,7 +116,7 @@ export default {
       }
       for (var j = 0; j < this.tableData.length; j++) {
         axios
-          .post("/api/admin/file/get", {
+          .get("/api/admin/activity/file/get", {
             uuid: this.tableData[j].volunteer_time
           })
           .then(response => {
@@ -123,7 +128,7 @@ export default {
       }
       for (var k = 0; k < this.tableData.length; k++) {
         axios
-          .post("/api/admin/file/get", {
+          .get("/api/admin/activity/file/get", {
             uuid: this.tableData[k].activity_prove
           })
           .then(response => {
@@ -134,7 +139,7 @@ export default {
           });
       }
     },
-    
+
     //每页下拉显示数据
     handleSizeChange: function(size) {
       this.pagesize = size;
@@ -148,7 +153,6 @@ export default {
   },
   mounted() {
     this.getData();
-    
   }
 };
 </script>
