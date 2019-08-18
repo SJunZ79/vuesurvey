@@ -105,7 +105,9 @@ export default {
       for (var i = 0; i < this.tableData.length; i++) {
         axios
           .get("/api/admin/activity/file/get", {
-            uuid: this.tableData[i].material
+            params: {
+              uuid: this.tableData[i].material
+            }
           })
           .then(response => {
             this.tableData[i].material = response.data.name;
@@ -117,7 +119,9 @@ export default {
       for (var j = 0; j < this.tableData.length; j++) {
         axios
           .get("/api/admin/activity/file/get", {
-            uuid: this.tableData[j].volunteer_time
+            params: {
+              uuid: this.tableData[j].volunteer_time
+            }
           })
           .then(response => {
             this.tableData[j].volunteer_time = response.data.name;
@@ -129,7 +133,9 @@ export default {
       for (var k = 0; k < this.tableData.length; k++) {
         axios
           .get("/api/admin/activity/file/get", {
-            uuid: this.tableData[k].activity_prove
+            params: {
+              uuid: this.tableData[k].activity_prove
+            }
           })
           .then(response => {
             this.tableData[k].activity_prove = response.data.name;
