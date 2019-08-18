@@ -18,21 +18,21 @@
     <el-container>
       <el-aside width="200px">
         <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router>
-          <el-menu-item index="/home">
+          <el-menu-item index="/HelloWorld/home">
             <i class="el-icon-edit-outline"></i>
             <span slot="title">首页</span>
           </el-menu-item>
 
-          <el-menu-item index="/nacty">
+          <el-menu-item index="/HelloWorld/nacty">
             <i class="el-icon-edit-outline"></i>
             <span slot="title">新建活动</span>
           </el-menu-item>
 
-          <el-menu-item index="/qiandao">
+          <el-menu-item index="/HelloWorld/qiandao">
             <i class="el-icon-mobile"></i>
             <span slot="title">活动签到器</span>
           </el-menu-item>
-          <el-menu-item index="/qingk">
+          <el-menu-item index="/HelloWorld/qingk">
             <i class="el-icon-document"></i>
             <span slot="title">签到情况查看</span>
           </el-menu-item>
