@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" class="clearfix">
-      <span>签到填写：</span>
+      <span>签到填写：{{ activity_name }}</span>
     </div>
     <div>
       <el-form
@@ -11,14 +11,14 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+        <el-form-item label="学号" prop="stuID">
+          <el-input v-model="ruleForm.stuID"></el-input>
         </el-form-item>
-        <el-form-item label="学号" prop="number">
-            <el-input v-model="ruleForm.number"></el-input>
+        <el-form-item label="姓名" prop="stuName">
+          <el-input v-model="ruleForm.stuName"></el-input>
         </el-form-item>
-        <el-form-item label="班级" prop="stri">
-            <el-input v-model="ruleForm.stri"></el-input>
+        <el-form-item label="班级" prop="stuProfessionAndClass">
+          <el-input v-model="ruleForm.stuProfessionAndClass"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')" style="text-align:center;">立即创建</el-button>
@@ -35,19 +35,16 @@ export default {
   data() {
     return {
       ruleForm: {
-        name: "",
-        number: "",
-        stri: ""
+        activity_name: this.$route.query.activity_name,
+        stuName: "",
+        stuID: "",
+        stuProfessionAndClass: ""
       },
       rules: {
-        name: [
-          { required: true, message: "请输入姓名", trigger: "blur" }
-        ],
-        number: [
-            { required: true, message: "请输入学号",trigger: "blur"}
-        ],
-        stri: [
-            { required: true, message: "请输入年级班级", trigger: "blur"}
+        stuID: [{ required: true, message: "请输入学号", trigger: "blur" }],
+        stuName: [{ required: true, message: "请输入姓名", trigger: "blur" }],
+        stuProfessionAndClass: [
+          { required: true, message: "请输入年级班级", trigger: "blur" }
         ]
       }
     };
@@ -68,16 +65,24 @@ export default {
       this.$refs[formName].resetFields();
     },
     postData() {
-      axios.post('/user/newActivity',{
-        name: this.ruleForm.name,
-        number: this.ruleForm.number,
-        stri: this.ruleForm.stri
-      }).then(response => {
-        response = this.ruleForm;
-        console.log(response);
-      }).catch(function (error){
-        console.log(error);
-      });
+      axios
+        .post("/api/admin/signed/doSignedIn", {
+          token: this.$route.query.urltoken,
+          stuName: this.ruleForm.stuName,
+          stuID: this.ruleForm.stuID,
+          stuProfessionAndClass: this.ruleForm.stuProfessionAndClass
+        })
+        .then(response => {
+          if(response.data.status === "200"){
+            this.$message.success("提交成功！");
+            console.log(response.data);
+          }else{
+            this.$message.error("提交失败！");
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };
@@ -91,8 +96,8 @@ export default {
 .item {
   margin-bottom: 18px;
 }
-.clearfix{
-    text-align: center;
+.clearfix {
+  text-align: center;
 }
 
 .clearfix:before,
@@ -106,6 +111,5 @@ export default {
 
 .box-card {
   width: 480px;
-  
 }
 </style>

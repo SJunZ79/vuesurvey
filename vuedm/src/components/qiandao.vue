@@ -54,7 +54,9 @@ export default {
             trigger: "change"
           }
         ]
-      }
+      },
+      token:'',
+      validaty:0
     };
   },
   methods: {
@@ -77,10 +79,10 @@ export default {
       this.$refs[formName].resetFields();
     },
     function1() {
-      axios.get("/api/admin/activity/upload").then(
+      axios.get("/api/admin/activity/getAllActivity").then(
         response => {
-          console.log(response.data);
-          this.data = response.data;
+          console.log(response.data.activity);
+          this.data = response.data.activity;
         },
         response => {
           console.log("error");
@@ -91,20 +93,23 @@ export default {
       var activity_id = document.getElementById("sel").value;
       axios
         .post("/api/admin/signed/create", {
-          activity_id: this.activity_id,
-          date2: this.qianForm.date2 *60,
-          url: "http://localhost:8080/code"
+          id: this.activity_id,
+          validity: this.qianForm.date2 *60,
+          url: "http://localhost:8080/middle"
         })
         .then(response => {
-          response = this.active_name;
-          console.log(response);
+          if(response.data.status === 200){
+            this.$message.success("提交成功！");
+            this.token = response.data.token;
+            this.validaty = response.data.validaty;
+          console.log(response);}
         })
         .catch(function(error) {
           console.log(error);
         });
     },
     toURL() {
-      this.$router.push({ path: '/code' }) 
+      this.$router.push({ path: '/code' ,query:{token:this.token}}) 
     }
   }
 };

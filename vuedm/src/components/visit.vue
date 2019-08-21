@@ -65,7 +65,7 @@ export default {
       this.width = width + "px";
     },
     fanhui(){
-      this.$router.push({ path: '/' }) 
+      this.$router.push({ path: '/HelloWorld' }) 
     }
   }
 };

@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     fanhui(){
-      this.$router.push({ path: '/' }) 
+      this.$router.push({ path: '/HelloWorld' }) 
     }
   }
 };

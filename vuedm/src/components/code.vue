@@ -1,7 +1,9 @@
 <template>
   <div>
     <p>{{ activity_name }}</p>
-    <div><img src="srbase" /></div>
+    <div>
+      <img src="srbase" />
+    </div>
   </div>
 </template>
 
@@ -11,18 +13,21 @@ export default {
   data() {
     return {
       activity_name: "",
-      srbase: ""
+      srbase: "",
+      validity:0
     };
   },
   methods: {
     getData() {
       axios
-        .get("/user/qiandao")
+        .get("/api/admin/signed/getQRCode", {
+          params: { token: this.$route.query.token }
+        })
         .then(response => {
           console.log(response.data);
-          this.activity_name = response.data.activity_id;
-          this.srbase = "data:image/jpeg;base64," + response.data.srbase;
-
+          this.validity = response.data.validity;
+          this.srbase = "data:image/jpeg;base64," + response.data.qr_code;
+          
         })
         .catch(function(error) {
           console.log(error);

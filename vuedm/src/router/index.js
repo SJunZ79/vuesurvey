@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import edit from '../components/edit'
 import visit from '../components/visit'
 import code from '../components/code'
+import middle from '../components/middle'
 import saoma from '../components/saoma'
 import Register from "../components/Register";
 import Activate from "../components/Activate";
@@ -60,6 +61,11 @@ export default new Router({
       path:'/code',
       name:'code',
       component:code
+    },
+    {
+      path:'/middle',
+      name:'middle',
+      component:middle
     },
     {
       path: '/saoma',

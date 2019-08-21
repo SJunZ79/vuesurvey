@@ -115,6 +115,25 @@ export default {
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
+    beforeFirstUpload(file) {
+      var testmsg = file.name.substring(file.name.lastIndexOf(".") + 1);
+      const extension = testmsg === "zip";
+      const extension2 = testmsg === "zar";
+      const isLt2M = file.size / 1024 / 1024 < 10;
+      if (!extension && !extension2) {
+        this.$message({
+          message: "上传文件只能是 zip、zar格式!",
+          type: "warning"
+        });
+      }
+      if (!isLt2M) {
+        this.$message({
+          message: "上传文件大小不能超过 10MB!",
+          type: "warning"
+        });
+      }
+      return extension || (extension2 && isLt2M);
+    },
     beforeAvatarUpload(file) {
       var testmsg = file.name.substring(file.name.lastIndexOf(".") + 1);
       const extension = testmsg === "png";
@@ -135,7 +154,7 @@ export default {
       return extension || (extension2 && isLt2M);
     },
     fanhui(){
-      this.$router.push({ path: '/' }) 
+      this.$router.push({ path: '/HelloWorld' }) 
     }
   }
 };
