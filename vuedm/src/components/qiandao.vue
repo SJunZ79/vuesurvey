@@ -93,7 +93,7 @@ export default {
           url: "http://localhost:8080/middle"
         })
         .then(response => {
-          if (response.data.status === 200) {
+          if (response.data.status === "200") {
             this.$message.success("提交成功！");
             this.token = response.data.token;
             this.validaty = response.data.validaty;

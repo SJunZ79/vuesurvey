@@ -133,7 +133,7 @@ export default {
           time: this.ruleForm.date1
         })
         .then(response => {
-          if (response.data.status === 200) {
+          if (response.data.status === "200") {
             console.log(response.data);
             this.$message.success("请求成功！");
           } else {
