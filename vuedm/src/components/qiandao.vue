@@ -8,7 +8,7 @@
       class="demo-ruleForm"
     >
       <el-form-item label="活动名称" prop="region">
-        <el-select id="sel" v-model="qianForm.region" placeholder="请选择活动区域" @focus="function1">
+        <el-select id="sel" v-model="qianForm.region" placeholder="请选择活动名称" @focus="function1">
           <el-option v-for="item in data" :key="item.id" :value="item.id" :label="item.name"></el-option>
         </el-select>
       </el-form-item>
@@ -40,7 +40,7 @@ export default {
       data: [],
       rules: {
         region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
+          { required: true, message: "请选择活动名称", trigger: "change" }
         ],
 
         date2: [
@@ -88,7 +88,7 @@ export default {
     sendData() {
       axios
         .post("/api/admin/signed/create", {
-          id: this.$('#sel').value,
+          id: this.qianForm.region,
           validity: this.qianForm.date2 * 60,
           url: "http://localhost:8080/middle"
         })
