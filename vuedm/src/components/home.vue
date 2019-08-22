@@ -96,7 +96,7 @@ export default {
           } else {
             console.log(response.data);
             this.tableData = response.data.activities;
-            this.tableData.foreach(item => {
+            this.tableData.forEach(item => {
               axios
                 .post("/api/admin/activity/file/get", {
                   uuid: item.material
@@ -108,7 +108,7 @@ export default {
                   console.log(error);
                 });
             });
-            this.tableData.foreach(item => {
+            this.tableData.forEach(item => {
               axios
                 .post("/api/admin/activity/file/get", {
                   uuid: item.volunteer_time
@@ -120,7 +120,7 @@ export default {
                   console.log(error);
                 });
             });
-            this.tableData.foreach(item => {
+            this.tableData.forEach(item => {
               axios
                 .post("/api/admin/activity/file/get", {
                   uuid: item.activity_prove
