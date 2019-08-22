@@ -10,9 +10,6 @@
       <el-form-item label="活动名称" prop="name">
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
-      <el-form-item label="活动区域" prop="region">
-        <el-input v-model="ruleForm.region"></el-input>
-      </el-form-item>
       <el-form-item label="活动时间" required>
         <el-col :span="11">
           <el-form-item prop="date1">
@@ -24,16 +21,6 @@
             ></el-date-picker>
           </el-form-item>
         </el-col>
-        <el-col class="line" :span="2">-</el-col>
-        <el-col :span="11">
-          <el-form-item prop="date2">
-            <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-          </el-form-item>
-        </el-col>
-      </el-form-item>
-      
-      <el-form-item label="活动简介" prop="desc">
-        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -50,18 +37,13 @@ export default {
     return {
       ruleForm: {
         name: "",
-        region: "",
         date1: "",
-        date2: "",
-        desc: ""
+        
       },
       rules: {
         name: [
           { required: true, message: "请输入活动名称", trigger: "blur" },
           
-        ],
-        region: [
-          { required: true, message: "请输入活动区域", trigger: "blur" }
         ],
         date1: [
           {
@@ -71,15 +53,7 @@ export default {
             trigger: "change"
           }
         ],
-        date2: [
-          {
-            type: "date",
-            required: true,
-            message: "请选择时间",
-            trigger: "change"
-          }
-        ],
-        desc: [{ required: true, message: "请填写活动简介", trigger: "blur" }]
+        
       }
     };
   },
@@ -101,10 +75,9 @@ export default {
 
     postData() {
       axios.post('/api/admin/activity/upload',{
-        name: this.ruleForm.name,
-        region: this.ruleForm.region,
+        activity_name: this.ruleForm.name,
         time: this.ruleForm.date1,
-        desc: this.ruleForm.desc
+        
       }).then(response => {
         if(response.data.status === 200){
           console.log(response.data);

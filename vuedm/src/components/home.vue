@@ -15,12 +15,14 @@
           <el-table-column prop="volunteer_time" label="志愿时文档" width="180"></el-table-column>
           <el-table-column prop="activity_prove" label="活动分文档" width="180"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
-            <template slot-scope class="text-decoration">
+            <template slot-scope="scope" class="text-decoration">
               <el-button type="text" size="small">
                 <router-link to="/visit">查看</router-link>
               </el-button>
               <el-button type="text" size="small">
-                <router-link to="/edit">编辑</router-link>
+                <router-link
+                  :to="{path:'/edit', query : { activity_id:scope.row.id}}"
+                >编辑</router-link>
               </el-button>
               <el-button type="text" size="small">删除</el-button>
             </template>
@@ -158,7 +160,7 @@ export default {
     }
   },
   mounted() {
-    this.subData();
+    this.getData();
   }
 };
 </script>
