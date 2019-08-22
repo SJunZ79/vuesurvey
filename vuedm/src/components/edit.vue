@@ -43,7 +43,7 @@
         <p>活动材料上传：</p>
         <el-upload
           class="upload-demo"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
@@ -52,6 +52,7 @@
           :on-exceed="handleExceed"
           :file-list="fileList"
           :beforeUpload="beforeFirstUpload"
+          :http-request="loadZip"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传zip文件，且不超过10MB</div>
@@ -61,7 +62,7 @@
         <p>志愿时证明材料上传：</p>
         <el-upload
           class="upload-demo"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
@@ -70,6 +71,7 @@
           :on-exceed="handleExceed"
           :file-list="fileList"
           :beforeUpload="beforeAvatarUpload"
+          :http-request="uploadImg"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传doc/docx文件，且不超过10MB</div>
@@ -79,7 +81,7 @@
         <p>活动分证明材料上传：</p>
         <el-upload
           class="upload-demo"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
@@ -88,6 +90,7 @@
           :on-exceed="handleExceed"
           :file-list="fileList"
           :beforeUpload="beforeAvatarUpload"
+          :http-request="uploadImg"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传doc/docx文件，且不超过10MB</div>
@@ -173,6 +176,18 @@ export default {
       }
       return extension || (extension2 && isLt2M);
     },
+
+    uploadZip(fileObj){
+      let formData = new FormData();
+      formData.set("file", fileObj.file);
+      axios
+        .post('/api/admin/activity/editActivity', formData, {
+          headers: {
+            "Content-type": "multipart/form-data"
+          }
+        }).then().catch();
+    },
+
     fanhui(){
       this.$router.push({ path: '/HelloWorld' }) 
     },
