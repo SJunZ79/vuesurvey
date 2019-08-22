@@ -8,7 +8,7 @@
         :model="ruleForm"
         :rules="rules"
         ref="ruleForm"
-        label-width="100px"
+        label-width="120px"
         class="demo-ruleForm"
       >
         <el-form-item label="学号" prop="stuID">
@@ -17,7 +17,10 @@
         <el-form-item label="姓名" prop="stuName">
           <el-input v-model="ruleForm.stuName"></el-input>
         </el-form-item>
-        <el-form-item label="班级" prop="stuProfessionAndClass">
+        <el-form-item label="年级" prop="stuProfession">
+          <el-input v-model="ruleForm.stuName"></el-input>
+        </el-form-item>
+        <el-form-item label="专业班级" prop="stuClass">
           <el-input v-model="ruleForm.stuProfessionAndClass"></el-input>
         </el-form-item>
         <el-form-item>
@@ -38,13 +41,17 @@ export default {
         activity_name: this.$route.query.activity_name,
         stuName: "",
         stuID: "",
-        stuProfessionAndClass: ""
+        stuProfession:"",
+        stuClass: ""
       },
       rules: {
         stuID: [{ required: true, message: "请输入学号", trigger: "blur" }],
         stuName: [{ required: true, message: "请输入姓名", trigger: "blur" }],
-        stuProfessionAndClass: [
-          { required: true, message: "请输入年级班级", trigger: "blur" }
+        stuProfession: [
+          { required: true, message: "请输入年级", trigger: "blur" }
+        ],
+        stuClass: [
+          { required: true, message: "请输入专业班级", trigger: "blur" }
         ]
       }
     };
@@ -54,7 +61,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.postData();
-          alert("submit!");
+          
         } else {
           console.log("error submit!!");
           return false;
@@ -70,7 +77,7 @@ export default {
           token: this.$route.query.urltoken,
           stuName: this.ruleForm.stuName,
           stuID: this.ruleForm.stuID,
-          stuProfessionAndClass: this.ruleForm.stuProfessionAndClass
+          stuProfessionAndClass: this.ruleForm.stuProfession + this.ruleForm.stuClass
         })
         .then(response => {
           if(response.data.status === "200"){
