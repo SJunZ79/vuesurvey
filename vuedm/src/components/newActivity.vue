@@ -31,7 +31,7 @@
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
           multiple
-          :limit="3"
+          :limit="1"
           :on-exceed="handleExceed"
           :file-list="fileList"
           :beforeUpload="beforeFirstUpload"
@@ -50,7 +50,7 @@
           :on-remove="handleRemove"
           :before-remove="beforeRemove"
           multiple
-          :limit="3"
+          :limit="1"
           :on-exceed="handleExceed"
           :file-list="fileList"
           :beforeUpload="beforeAvatarUpload"

@@ -16,7 +16,7 @@
       </div>
     </el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="190px" >
         <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router>
           <el-menu-item index="/HelloWorld/home">
             <i class="el-icon-edit-outline"></i>
@@ -65,13 +65,23 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.el-container{
+  height: 600px;
+}
 .el-header {
-  background-color: #1e90ff;
+  background-color:rgba(135,206,235,0.5);
 }
 .name {
   float: left;
   font-weight: bold;
   font-size: 25px;
+}
+.el-aside{
+  height: 560px;
+  background-color:rgba(255,182,193,0.5);
+}
+.el-menu-vertical-demo{
+  background-color:rgba(255,182,193,0);
 }
 .el-dropdown{
   float: right;
