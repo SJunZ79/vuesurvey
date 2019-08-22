@@ -2,7 +2,7 @@
   <div>
     <p>{{ activity_name }}</p>
     <div>
-      <img src="srbase" />
+      <img :src="srbase" />
     </div>
   </div>
 </template>
