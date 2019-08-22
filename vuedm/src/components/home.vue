@@ -11,9 +11,9 @@
         >
           <el-table-column prop="id" label="序号" width="80"></el-table-column>
           <el-table-column prop="name" label="活动名称" width="180"></el-table-column>
-          <el-table-column prop="material" label="活动材料" width="220" v-if="tableData.material"></el-table-column>
-          <el-table-column prop="volunteer_time" label="志愿时文档" width="180" v-if="tableData.volunteer_time"></el-table-column>
-          <el-table-column prop="activity_prove" label="活动分文档" width="180" v-if="tableData.activity_prove"></el-table-column>
+          <el-table-column prop="material" label="活动材料" width="220" ></el-table-column>
+          <el-table-column prop="volunteer_time" label="志愿时文档" width="180" ></el-table-column>
+          <el-table-column prop="activity_prove" label="活动分文档" width="180" ></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope" class="text-decoration">
               <el-button type="text" size="small">
@@ -102,8 +102,11 @@ export default {
                   uuid: this.tableData[i].material
                 })
                 .then(response => {
-                  
-                  this.$set(this.tableData[i], "material", response.data.name);
+                  console.log(this.tableData[i].material);
+                  console.log(response.data.name);
+                  if(this.tableData[i].material !== undefined){
+                    this.$set(this.tableData[i], "material", response.data.name);
+                  }
                 })
                 .catch(function(error) {
                   console.log(error);
@@ -115,11 +118,16 @@ export default {
                   uuid: this.tableData[j].volunteer_time
                 })
                 .then(response => {
-                  this.$set(
+                  console.log(this.tableData[i].volunteer_time);
+                  console.log(response.data.name);
+                  if(this.tableData[i].volunteer_time !== undefined){
+                    this.$set(
                     this.tableData[j],
                     "volunteer_time",
                     response.data.name
                   );
+                  }
+                  
                 })
                 .catch(function(error) {
                   console.log(error);
@@ -131,11 +139,16 @@ export default {
                   uuid: this.tableData[k].activity_prove
                 })
                 .then(response => {
-                  this.$set(
+                  console.log(this.tableData[i].activity_prove);
+                  console.log(response.data.name);
+                  if(this.tableData[i].activity_prove !== undefined){
+                    this.$set(
                     this.tableData[k],
                     "activity_prove",
                     response.data.name
                   );
+                  }
+                  
                 })
                 .catch(function(error) {
                   console.log(error);
