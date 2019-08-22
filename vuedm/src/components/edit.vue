@@ -27,17 +27,17 @@
           <el-input v-model="editForm.name"></el-input>
         </el-form-item>
         <el-form-item label="活动时间" required>
-        <el-col :span="11">
-          <el-form-item prop="time">
-            <el-date-picker
-              type="date"
-              placeholder="选择日期"
-              v-model="editForm.time"
-              style="width: 100%;"
-            ></el-date-picker>
-          </el-form-item>
-        </el-col>
-      </el-form-item>
+          <el-col :span="11">
+            <el-form-item prop="time">
+              <el-date-picker
+                type="date"
+                placeholder="选择日期"
+                v-model="editForm.time"
+                style="width: 100%;"
+              ></el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-form-item>
       </el-form>
       <div class="material">
         <p>活动材料上传：</p>
@@ -106,7 +106,7 @@ export default {
     return {
       editForm: {
         name: "",
-        time:""
+        time: ""
       },
       rules: {
         name: [{ required: true, message: "请输入活动名称", trigger: "blur" }],
@@ -177,22 +177,45 @@ export default {
       return extension || (extension2 && isLt2M);
     },
 
-    uploadZip(fileObj){
+    uploadZip(fileObj) {
       let formData = new FormData();
       formData.set("file", fileObj.file);
       axios
-        .post('/api/admin/activity/editActivity', formData, {
+        .post("/api/admin/activity/editActivity", formData, {
           headers: {
             "Content-type": "multipart/form-data"
           }
-        }).then().catch();
+        })
+        .then()
+        .catch();
+      //POST传参序列化
+      axios.interceptors.request.use(
+        config => {
+          console.log(config, "request");
+          if (config.method === "post") {
+            let curPost = config.url.split("/")[
+              config.url.split("/").length - 1
+            ];
+            if (curPost === "uploadpicture" || curPost === "uploadfile") {
+              return config; // 这里对上传文件/图片的 api 不做传参序列化处理
+            } else {
+              config.data = qs.stringify(config.data);
+              return config;
+            }
+          }
+          return config;
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
     },
 
-    fanhui(){
-      this.$router.push({ path: '/HelloWorld' }) 
+    fanhui() {
+      this.$router.push({ path: "/HelloWorld" });
     },
-    tuichu(){
-      this.$router.push({path:'/'})
+    tuichu() {
+      this.$router.push({ path: "/" });
     }
   }
 };

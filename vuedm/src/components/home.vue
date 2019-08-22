@@ -104,7 +104,7 @@ export default {
                   uuid: this.tableData[i].material
                 })
                 .then(response => {
-                  this.tableData[i].material = response.data.name;
+                  this.$set(this.tableData[i],'material',response.data.name);
                 })
                 .catch(function(error) {
                   console.log(error);
@@ -116,7 +116,7 @@ export default {
                   uuid: this.tableData[j].volunteer_time
                 })
                 .then(response => {
-                  this.tableData[j].volunteer_time = response.data.name;
+                  this.$set(this.tableData[j],'volunteer_time',response.data.name);
                 })
                 .catch(function(error) {
                   console.log(error);
@@ -128,7 +128,7 @@ export default {
                   uuid: this.tableData[k].activity_prove
                 })
                 .then(response => {
-                  this.tableData[k].activity_prove = response.data.name;
+                  this.$set(this.tableData[k],'activity_prove',response.data.name);
                 })
                 .catch(function(error) {
                   console.log(error);
