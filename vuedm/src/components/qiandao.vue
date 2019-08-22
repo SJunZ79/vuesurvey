@@ -98,16 +98,14 @@ export default {
             this.token = response.data.token;
             this.validaty = response.data.validaty;
             console.log(response);
-            this.toURL();
+            this.$router.push({ path: "/code", query: { token: this.token } });
           }
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-    toURL() {
-      this.$router.push({ path: "/code", query: { token: this.token } });
-    }
+    
   }
 };
 </script>
