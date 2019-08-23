@@ -4,6 +4,7 @@
       <div class="demo-input-suffix fl">
         <el-input placeholder="请输入活动名称" prefix-icon="el-icon-search" v-model="input21"></el-input>
       </div>
+      <br />
       <div>
         <el-table
           :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
@@ -12,8 +13,8 @@
           <el-table-column prop="id" label="序号" width="80"></el-table-column>
           <el-table-column prop="name" label="活动名称" width="180"></el-table-column>
           <el-table-column prop="material" label="活动材料" width="220"></el-table-column>
-          <el-table-column prop="volunteer_time" label="志愿时文档" width="180"></el-table-column>
-          <el-table-column prop="activity_prove" label="活动分文档" width="180"></el-table-column>
+          <el-table-column prop="volunteer_time" label="志愿时文档" width="192"></el-table-column>
+          <el-table-column prop="activity_prove" label="活动分文档" width="192"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope" class="text-decoration">
               <el-button type="text" size="small">
@@ -25,6 +26,7 @@
               <el-button type="text" size="small">删除</el-button>
             </template>
           </el-table-column>
+          
         </el-table>
         <div class="pagination">
           <el-pagination
@@ -63,6 +65,20 @@ export default {
     };
   },
   methods: {
+    /*headerStyle({row, column, rowIndex, columnIndex}){
+      if(rowIndex === 0) {
+        return 'background:transparent;color:#000;border:1px solid #fff;'
+      }else{
+        return ''
+      }
+    },
+    cellStyle({row, column, rowIndex, columnIndex}){
+      if(rowIndex !== 0){
+        return 'background:rgba(119,136,153,0.5);color:#000;border:1px solid #fff;'
+      }else{
+        return ''
+      }
+    },*/
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -157,6 +173,20 @@ export default {
 };
 </script>
 
+<style>
+.el-table th,
+.el-table tr {
+  background: transparent;
+  color:#fff;
+  border: 1px solid #fff;
+}
+.el-table,
+.el-table__expanded-cell {
+  background: transparent;
+  border:1px solid #000;
+  color:#000;
+}
+</style>
 <style scoped>
 a {
   text-decoration: none;
@@ -166,4 +196,15 @@ a {
   text-decoration: none;
   color: pink;
 }
+.el-input >>> .el-input__inner {
+  -webkit-appearance:none;
+  -moz-appearance: none;
+  font-size: 1.2em;
+  border-radius: 4px;
+  border:1px solid #000;
+  background-color:  rgba(119,136,153, 0.5);
+  color: #000;
+  outline: 0;
+}
+
 </style>

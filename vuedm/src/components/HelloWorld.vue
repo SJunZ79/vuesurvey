@@ -75,20 +75,24 @@ export default {
   float: left;
   font-weight: bold;
   font-size: 25px;
+  width:168px;
+  border-right:1px solid #fff;
 }
 .el-aside{
   height: 560px;
   background-color:rgba(255,182,193,0.5);
+  border-right: 1px solid #fff;
 }
 .el-menu-vertical-demo{
   background-color:rgba(255,182,193,0);
+  border-right: none;
 }
 .el-dropdown{
   float: right;
 }
 .el-avatar {
   
-  background-color: #1e90ff;
+  background-color:rgba(135,206,235,0);
 }
 .el-dropdown-link {
     cursor: pointer;
