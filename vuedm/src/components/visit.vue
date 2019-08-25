@@ -22,20 +22,43 @@
         </div>
         <div class="text item">
           <p class="inline-block">活动材料：{{ material }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <el-button
+            type="primary"
+            icon="el-icon-view"
+            @click="getZip();dialogTableVisible = true"
+          >预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-dialog title="图片预览" :visible.sync="dialogTableVisible" :width="width">
+            <img
+              v-for="item in images"
+              :key="item.contentType"
+              :src="'data:image/jpeg;base64,'+item.base64Str"
+              @load="onLoad"
+            />
+          </el-dialog>
           <el-button type="primary" icon="el-icon-download">下载文档</el-button>
           <br />
           <br />
           <p class="inline-block">志愿时证明材料：{{ volunteer_prove }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <el-button type="primary" icon="el-icon-view" @click="dialogTableVisible = true">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <el-dialog title="图片预览" :visible.sync="dialogTableVisible" :width="width">
-            <img src="../assets/心理知识竞赛活动证明.jpg" @load="onLoad" />
+          <el-button type="primary" icon="el-icon-view" @click="dialogTable=true">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-dialog title="图片预览" :visible.sync="dialogTable" :width="width">
+            <el-table :data="volunteerData" height="250" border style="width: 100%">
+              <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
+              <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
+              <el-table-column prop="stuClass" label="班级"></el-table-column>
+            </el-table>
           </el-dialog>
-
           <el-button type="primary" icon="el-icon-picture-outline">下载图片</el-button>
           <br />
           <br />
           <p class="inline-block">活动分证明材料：{{ activity_prove }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <el-button type="primary" icon="el-icon-view">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-button type="primary" icon="el-icon-view" @click="Table=true">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-dialog title="图片预览" :visible.sync="Table" :width="width">
+            <el-table :data="activityData" height="250" border style="width: 100%">
+              <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
+              <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
+              <el-table-column prop="stuClass" label="班级"></el-table-column>
+            </el-table>
+          </el-dialog>
           <el-button type="primary" icon="el-icon-picture-outline">下载图片</el-button>
         </div>
       </el-card>
@@ -44,15 +67,21 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      activity: "年年有余！",
-      material: "enough.word",
-      volunteer_prove: "enough.jpg",
-      activity_prove: "satisfaction.jpg",
+      activity: this.$route.query.name,
+      material: this.$route.query.material,
+      volunteer_prove: this.$route.query.volunteer_time,
+      activity_prove: this.$route.query.activity_prove,
       width: "",
-      dialogTableVisible: false
+      dialogTableVisible: false,
+      images: [],
+      volunteerData: [],
+      activityData: [],
+      dialogTable: false,
+      Table: false
     };
   },
   methods: {
@@ -64,8 +93,48 @@ export default {
       }
       this.width = width + "px";
     },
-    fanhui(){
-      this.$router.push({ path: '/HelloWorld' }) 
+    getZip() {
+      axios
+        .post("/api/admin/activity/getZipContent", {
+          uuid: this.$route.query.material_uuid
+        })
+        .then(response => {
+          this.images = response.data.images;
+        })
+        .catch(function(error) {
+          console.log("error");
+        });
+    },
+    getVolun() {
+      axios
+        .post("/api/admin/activity/getDocParseData", {
+          uuid: this.$route.query.volunteer_time_uuid,
+          file_type:1,
+          activity_id:this.$route.query.activity_id
+        })
+        .then(response => {
+          this.volunteerData = response.data.parse_data;
+        })
+        .catch(function(error) {
+          console.log("error");
+        });
+    },
+    getActivity() {
+      axios
+        .post("/api/admin/activity/getDocParseData", {
+          uuid: this.$route.query.activity_prove_uuid,
+          file_type:0,
+          activity_id:this.$route.query.activity_id
+        })
+        .then(response => {
+          this.activityData = response.data.parse_data;
+        })
+        .catch(function(error) {
+          console.log("error");
+        });
+    },
+    fanhui() {
+      this.$router.push({ path: "/HelloWorld" });
     }
   }
 };

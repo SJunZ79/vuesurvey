@@ -13,20 +13,24 @@
           <el-table-column prop="id" label="序号" width="80"></el-table-column>
           <el-table-column prop="name" label="活动名称" width="180"></el-table-column>
           <el-table-column prop="material" label="活动材料" width="220"></el-table-column>
+          <el-table-column prop="material_uuid" label width="0" v-if="false"></el-table-column>
           <el-table-column prop="volunteer_time" label="志愿时文档" width="192"></el-table-column>
+          <el-table-column prop="volunteer_time_uuid" label width="0" v-if="false"></el-table-column>
           <el-table-column prop="activity_prove" label="活动分文档" width="192"></el-table-column>
+          <el-table-column prop="activity_prove_uuid" label width="0" v-if="false"></el-table-column>
           <el-table-column fixed="right" label="操作" width="130">
             <template slot-scope="scope" class="text-decoration">
               <el-button type="text" size="small">
-                <router-link to="/visit">查看</router-link>
+                <router-link
+                  :to="{path:'/visit', query : { material_uuid:scope.row.material_uuid , volunteer_time_uuid:scope.row.volunteer_time_uuid , activity_prove_uuid:scope.row.activity_prove_uuid , activity_id:scope.row.id,material:scope.row.material,volunteer_time:scope.row.volunteer_time,activity_prove:scope.row.activity_prove,name:scope.row.name}}"
+                >查看</router-link>
               </el-button>
               <el-button type="text" size="small">
-                <router-link :to="{path:'/edit', query : { activity_id:scope.row.id}}">编辑</router-link>
+                <router-link :to="{path:'/edit', query : { activity_id:scope.row.id,material:scope.row.material,volunteer_time:scope.row.volunteer_time,activity_prove:scope.row.activity_prove}}">编辑</router-link>
               </el-button>
               <el-button type="text" size="small">删除</el-button>
             </template>
           </el-table-column>
-          
         </el-table>
         <div class="pagination">
           <el-pagination
@@ -113,6 +117,7 @@ export default {
             console.log(response.data);
             this.tableData = response.data.activities;
             this.tableData.forEach(item => {
+              this.$set(item, "material_uuid", item.material);
               axios
                 .post("/api/admin/activity/file/get", {
                   uuid: item.material
@@ -125,6 +130,7 @@ export default {
                 });
             });
             this.tableData.forEach(item => {
+              this.$set(item, "volunteer_time_uuid", item.volunteer_time);
               axios
                 .post("/api/admin/activity/file/get", {
                   uuid: item.volunteer_time
@@ -137,6 +143,7 @@ export default {
                 });
             });
             this.tableData.forEach(item => {
+              this.$set(item, "activity_prove_uuid", item.activity_prove);
               axios
                 .post("/api/admin/activity/file/get", {
                   uuid: item.activity_prove
@@ -177,14 +184,14 @@ export default {
 .el-table th,
 .el-table tr {
   background: transparent;
-  color:#fff;
+  color: #fff;
   border: 1px solid #fff;
 }
 .el-table,
 .el-table__expanded-cell {
   background: transparent;
-  border:1px solid #000;
-  color:#000;
+  border: 1px solid #000;
+  color: #000;
 }
 </style>
 <style scoped>
@@ -197,14 +204,13 @@ a {
   color: pink;
 }
 .el-input >>> .el-input__inner {
-  -webkit-appearance:none;
+  -webkit-appearance: none;
   -moz-appearance: none;
   font-size: 1.2em;
   border-radius: 4px;
-  border:1px solid #000;
-  background-color:  rgba(119,136,153, 0.5);
+  border: 1px solid #000;
+  background-color: rgba(119, 136, 153, 0.5);
   color: #000;
   outline: 0;
 }
-
 </style>

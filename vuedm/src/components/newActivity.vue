@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="newform" :model="newform" :rules="rules" label-width="100px">
+    <el-form ref="newform" :model="newform" :rules="rules" label-width="150px">
       <el-form-item prop="expName" label="活动名称" required>
         <el-input v-model="newform.expName" placeholder="" style="width:75%">
         </el-input>
@@ -14,7 +14,7 @@
               ></el-date-picker>
         
       </el-form-item>
-      <el-form-item label="" prop="expvmInstruction">
+      <el-form-item label="活动材料" prop="expvmInstruction">
         <el-upload
           class="upload-demo"
           drag
@@ -27,7 +27,7 @@
           <div slot="tip" class="el-upload__tip">活动材料上传，只能传(.zip)文件</div>
         </el-upload>
       </el-form-item>
-      <el-form-item label="" prop="expvmFiles">
+      <el-form-item label="志愿时证明材料" prop="expvmFiles">
         <el-upload
           class="upload-demo"
           drag
@@ -41,7 +41,7 @@
           <div slot="tip" class="el-upload__tip">志愿时证明材料上传，只能传(.doc/.docx)文件</div>
         </el-upload>
       </el-form-item>
-      <el-form-item label=""  prop="expvmVideo">
+      <el-form-item label="活动分证明材料"  prop="expvmVideo">
         <el-upload
           class="upload-demo"
           drag
@@ -136,6 +136,8 @@
   }
 </script>
 
-<style scoped>
-
+<style >
+.el-form-item__label{
+  color:#fff;
+}
 </style>

@@ -17,7 +17,7 @@
     </el-header>
     <el-main>
       <div>
-        <el-form ref="newform" :model="newform" :rules="rules" label-width="100px">
+        <el-form ref="newform" :model="newform" :rules="rules" label-width="150px">
           <el-form-item prop="expName" label="活动名称" required>
             <el-input v-model="newform.expName" placeholder style="width:75%"></el-input>
           </el-form-item>
@@ -29,7 +29,7 @@
               style="width: 75%;"
             ></el-date-picker>
           </el-form-item>
-          <el-form-item label prop="expvmInstruction">
+          <el-form-item label="活动材料:" prop="expvmInstruction">{{ isupload }}
             <el-upload
               class="upload-demo"
               drag
@@ -46,7 +46,7 @@
               <div slot="tip" class="el-upload__tip">活动材料上传，只能传(.zip)文件</div>
             </el-upload>
           </el-form-item>
-          <el-form-item label prop="expvmFiles">
+          <el-form-item label="志愿时证明材料:" prop="expvmFiles">{{ isup }}
             <el-upload
               class="upload-demo"
               drag
@@ -63,7 +63,7 @@
               <div slot="tip" class="el-upload__tip">志愿时证明材料上传，只能传(.doc/.docx)文件</div>
             </el-upload>
           </el-form-item>
-          <el-form-item label prop="expvmVideo">
+          <el-form-item label="活动分证明材料:" prop="expvmVideo">{{ isu }}
             <el-upload
               class="upload-demo"
               drag
@@ -104,6 +104,9 @@
           expName: '',
           expSn: '',
         },
+        isupload:'',
+        isup:'',
+        isu:'',
         rules: {
         expName: [{ required: true, message: "请输入活动名称", trigger: "blur" }],
         expSn: [
@@ -156,14 +159,45 @@
       newVideo (file) {
         this.uploadForm.append('act_doc', file)
         return false
+      },
+      judgeload1(){
+        if(this.$route.query.material === null){
+          this.isupload = "未上传"
+        }else{
+          this.isupload = "重新上传"
+        }
+      },
+      judgeload2(){
+        if(this.$route.query.volunteer_time === null){
+          this.isup = "未上传"
+        }else{
+          this.isup = "重新上传"
+        }
+      },
+      judgeload3(){
+        if(this.$route.query.activity_prove === null){
+          this.isu = "未上传"
+        }else{
+          this.isu = "重新上传"
+        }
       }
+    },
+    mounted(){
+      judgeload1(),
+      judgeload2(),
+      judgeload3()
     }
   }
 </script>
 
+<style>
+.el-form-item__label{
+  color:#fff;
+}
+</style>
 <style scoped>
 .el-header {
-  background-color: #1e90ff;
+  background-color:rgba(135,206,235,0.5);
 }
 .name {
   float: left;
@@ -174,7 +208,7 @@
   float: right;
 }
 .el-avatar {
-  background-color: #1e90ff;
+  background-color:rgba(255,182,193,0.5);
 }
 .el-dropdown-link {
   cursor: pointer;
