@@ -14,13 +14,11 @@
         </el-select>
       </el-form-item>
     </el-form>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    
-    <br>
-    <br>
-    <br>
-    <el-button type="primary" plain class="wor">导出Word</el-button>
-    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br />
+    <br />
+    <br />
+    <el-button type="primary" plain class="wor" @click="submitForm('ruleForm')">导出Word</el-button>
   </el-main>
 </template>
 
@@ -29,19 +27,18 @@ import axios from "axios";
 export default {
   data() {
     return {
-        
       ruleForm: {
         region: ""
       },
-      data:[],
+      data: [],
       rules: {
         region: [
-          { required: true, message: "请选择活动名称", trigger: "change" }
+          { required: true, message: "请选择活动名称", trigger: "blur" }
         ]
       }
     };
   },
-  methods:{
+  methods: {
     function1() {
       axios.get("/api/admin/activity/getAllActivity").then(
         response => {
@@ -53,14 +50,29 @@ export default {
         }
       );
     },
-    getWord(){
-      axios.get("/api/admin/signed/export",{
-        activity_id:this.ruleForm.region
-      }).then(response => {
-
-      }).catch(function(error){
-        console.log("error");
-      })
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.getWord();
+        } else {
+          alert("error submit!!");
+          return false;
+        }
+      });
+    },
+    getWord() {
+      axios
+        .get("/api/admin/signed/export", {
+          params: { activity_id: this.ruleForm.region }
+        })
+        .then(response => {
+          if(response.data.status === "200"){
+            this.$message.success("提交成功！");
+          }
+        })
+        .catch(function(error) {
+          console.log("error");
+        });
     }
   }
 };
@@ -70,11 +82,10 @@ export default {
 .inline-block {
   display: inline-block;
 }
-.check{
-    background-color:dodgerblue;
+.check {
+  background-color: dodgerblue;
 }
-.wor{
+.wor {
   margin-left: 20px;
 }
-
 </style>
