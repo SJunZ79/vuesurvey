@@ -36,7 +36,7 @@ export default {
     }
   },
   mounted() {
-    setInterval("getData()",10000)
+    setInterval(this.getData,10000)
   }
 };
 </script>
