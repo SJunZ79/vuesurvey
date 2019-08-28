@@ -27,6 +27,7 @@
               placeholder="选择日期"
               v-model="newform.expSn"
               style="width: 75%;"
+              value-format="yyyy-MM-dd"
             ></el-date-picker>
           </el-form-item>
           <el-form-item label="活动材料:" prop="expvmInstruction">{{ isupload }}
@@ -38,6 +39,7 @@
               :auto-upload="false"
               :before-upload="newHtml"
               accept=".zip"
+              :limit="1"
             >
               <div class="el-upload__text">
                 将文件拖到此处，或
@@ -55,6 +57,7 @@
               :auto-upload="false"
               :before-upload="newFiles"
               accept=".doc, .docx"
+              :limit="1"
             >
               <div class="el-upload__text">
                 将文件拖到此处，或
@@ -72,6 +75,7 @@
               :auto-upload="false"
               :before-upload="newVideo"
               accept=".doc, .docx"
+              :limit="1"
             >
               <div class="el-upload__text">
                 将文件拖到此处，或
@@ -111,10 +115,10 @@
         expName: [{ required: true, message: "请输入活动名称", trigger: "blur" }],
         expSn: [
           {
-            type: "date",
+            type: "string",
             required: true,
             message: "请选择日期",
-            trigger: "blur"
+            trigger: "change"
           }
         ]
       },
@@ -183,9 +187,9 @@
       }
     },
     mounted(){
-      judgeload1(),
-      judgeload2(),
-      judgeload3()
+      this.judgeload1(),
+      this.judgeload2(),
+      this.judgeload3()
     }
   }
 </script>
@@ -217,7 +221,9 @@
 .el-icon-arrow-down {
   font-size: 12px;
 }
-
+.el-scrollbar__wrap{
+  overflow-x: hidden;
+}
 .el-input {
   width: 350px;
 }

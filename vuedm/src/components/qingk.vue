@@ -18,7 +18,7 @@
     <br />
     <br />
     <br />
-    <el-button type="primary" plain class="wor" @click="submitForm('ruleForm')">导出Word</el-button>
+    <el-button type="primary" plain class="wor" @click="submitForm('ruleForm')"><a :href="wordhref">导出Word</a></el-button>
   </el-main>
 </template>
 
@@ -35,7 +35,8 @@ export default {
         region: [
           { required: true, message: "请选择活动名称", trigger: "blur" }
         ]
-      }
+      },
+      wordhref:''
     };
   },
   methods: {
@@ -55,12 +56,13 @@ export default {
         if (valid) {
           this.getWord();
         } else {
-          alert("error submit!!");
+          alert("导出失败！");
           return false;
         }
       });
     },
     getWord() {
+      this.wordhref = '/api/admin/signed/export?activity_id=' + this.ruleForm.region;
       axios
         .get("/api/admin/signed/export", {
           params: { activity_id: this.ruleForm.region }
@@ -87,5 +89,8 @@ export default {
 }
 .wor {
   margin-left: 20px;
+}
+a{
+  text-decoration: none;
 }
 </style>

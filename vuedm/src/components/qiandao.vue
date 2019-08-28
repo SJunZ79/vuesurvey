@@ -8,7 +8,7 @@
       class="demo-ruleForm"
     >
       <el-form-item label="活动名称" prop="region">
-        <el-select id="sel" v-model="qianForm.region" placeholder="请选择活动名称" @focus="function1">
+        <el-select id="sel" v-model="qianForm.region" placeholder="请选择活动名称" @focus="function1" @change="changeLocationValue">
           <el-option v-for="item in data" :key="item.id" :value="item.id" :label="item.name"></el-option>
         </el-select>
       </el-form-item>
@@ -53,7 +53,8 @@ export default {
         ]
       },
       token: "",
-      validaty: 0
+      validaty: 0,
+      getName:""
     };
   },
   methods: {
@@ -63,10 +64,10 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$message.success("生成成功！");
           this.sendData();
         } else {
-          alert("error submit!!");
+          this.$message.error("生成失败!!");
           return false;
         }
       });
@@ -85,6 +86,15 @@ export default {
         }
       );
     },
+    changeLocationValue(val) {
+      //data是v-for里面的也是datas里面的值
+      let obj = {};
+      obj = this.data.find(item => {
+        return item.id === val;
+      });
+      this.getName = obj.name;
+      console.log(getName);
+    },
     sendData() {
       axios
         .post("/api/admin/signed/create", {
@@ -98,14 +108,16 @@ export default {
             this.token = response.data.token;
             this.validaty = response.data.validaty;
             console.log(response);
-            this.$router.push({ path: "/code", query: { token: this.token } });
+            this.$router.push({
+              path: "/button",
+              query: { token: this.token , activity_name: this.getName}
+            });
           }
         })
         .catch(function(error) {
           console.log(error);
         });
-    },
-    
+    }
   }
 };
 </script>

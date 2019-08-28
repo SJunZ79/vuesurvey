@@ -11,6 +11,7 @@
                 placeholder="选择日期"
                 v-model="newform.expSn"
                 style="width: 75%;"
+                value-format="yyyy-MM-dd"
               ></el-date-picker>
         
       </el-form-item>
@@ -22,7 +23,8 @@
           :action="upload_url"
           :auto-upload="false"
           :before-upload="newHtml"
-          accept=".zip">
+          accept=".zip"
+          :limit="1">
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           <div slot="tip" class="el-upload__tip">活动材料上传，只能传(.zip)文件</div>
         </el-upload>
@@ -36,6 +38,7 @@
           :auto-upload="false"
           :before-upload="newFiles"
           accept=".doc,.docx"
+          :limit="1"
           >
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           <div slot="tip" class="el-upload__tip">志愿时证明材料上传，只能传(.doc/.docx)文件</div>
@@ -49,7 +52,8 @@
           :action="upload_url"
           :auto-upload="false"
           :before-upload="newVideo"
-          accept=".doc,.docx">
+          accept=".doc,.docx"
+          :limit="1">
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           <div slot="tip" class="el-upload__tip">活动分证明材料上传，只能传(.doc/.docx)文件</div>
         </el-upload>
@@ -84,10 +88,10 @@
         expName: [{ required: true, message: "请输入活动名称", trigger: "blur" }],
         expSn: [
           {
-            type: "date",
+            type: "string",
             required: true,
             message: "请选择日期",
-            trigger: "blur"
+            trigger: "change"
           }
         ]
       },

@@ -17,7 +17,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   background: url(./assets/afterimg/backg.jpg) no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   height: 100%;
   width:100%;
 }

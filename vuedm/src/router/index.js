@@ -10,6 +10,7 @@ import Register from "../components/Register";
 import Activate from "../components/Activate";
 import Loginbacks from "../components/Loginbacks";
 import FrontActivate from "../components/FrontActivate";
+import button from "../components/button";
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +72,11 @@ export default new Router({
       path: '/saoma',
       name: 'saoma',
       component: saoma
+    },
+    {
+      path:'/button',
+      name:'button',
+      component:button
     },
     //登陆注册
     {

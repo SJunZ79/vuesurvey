@@ -1,15 +1,17 @@
 <template>
-  <el-card class="box-card">
+  <div class="saoma">
     <div slot="header" class="clearfix">
       <span>签到填写：{{ activity_name }}</span>
     </div>
+    <br />
     <div>
       <el-form
         :model="ruleForm"
         :rules="rules"
         ref="ruleForm"
-        label-width="120px"
+        label-width="100px"
         class="demo-ruleForm"
+        style="width:90%;"
       >
         <el-form-item label="学号" prop="stuID">
           <el-input v-model="ruleForm.stuID"></el-input>
@@ -18,18 +20,18 @@
           <el-input v-model="ruleForm.stuName"></el-input>
         </el-form-item>
         <el-form-item label="年级" prop="stuProfession">
-          <el-input v-model="ruleForm.stuName"></el-input>
+          <el-input v-model="ruleForm.stuProfession"></el-input>
         </el-form-item>
         <el-form-item label="专业班级" prop="stuClass">
-          <el-input v-model="ruleForm.stuProfessionAndClass"></el-input>
+          <el-input v-model="ruleForm.stuClass"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')" style="text-align:center;">立即创建</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')" style="text-align:center;">签到</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
-  </el-card>
+  </div>
 </template>
 
 <script>
@@ -41,7 +43,7 @@ export default {
         activity_name: this.$route.query.activity_name,
         stuName: "",
         stuID: "",
-        stuProfession:"",
+        stuProfession: "",
         stuClass: ""
       },
       rules: {
@@ -61,7 +63,6 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.postData();
-          
         } else {
           console.log("error submit!!");
           return false;
@@ -77,13 +78,14 @@ export default {
           token: this.$route.query.urltoken,
           stuName: this.ruleForm.stuName,
           stuID: this.ruleForm.stuID,
-          stuProfessionAndClass: this.ruleForm.stuProfession + this.ruleForm.stuClass
+          stuProfessionAndClass:
+            this.ruleForm.stuProfession + this.ruleForm.stuClass
         })
         .then(response => {
-          if(response.data.status === "200"){
+          if (response.data.status === "200") {
             this.$message.success("提交成功！");
             console.log(response.data);
-          }else{
+          } else {
             this.$message.error("提交失败！");
           }
         })
@@ -95,28 +97,36 @@ export default {
 };
 </script>
 
+
 <style scoped>
+.saoma{
+  background: url(../assets/afterimg/saoma.jpg) no-repeat;
+  background-size: cover;
+  height:100%;
+  position: fixed;
+  width:100%;
+  
+}
+.demo-ruleForm >>> .el-form-item__label{
+  color:#fff;
+}
 .text {
   font-size: 14px;
 }
-
-.item {
-  margin-bottom: 18px;
-}
 .clearfix {
   text-align: center;
+  padding-top: 180px;
+  color: #fff;
+}
+.el-input >>> .el-input__inner {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-size: 1.2em;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  background-color: rgba(119, 136, 153, 0.5);
+  color: #fff;
+  outline: 0;
 }
 
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-.clearfix:after {
-  clear: both;
-}
-
-.box-card {
-  width: 480px;
-}
 </style>

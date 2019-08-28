@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <p>{{ activity_name }}</p>
-    <div>
+  <div class="code">
+    <div class="img">
+      <p>【签到】{{ activity_name }}</p>
       <img :src="srbase" />
     </div>
   </div>
@@ -19,6 +19,7 @@ export default {
   },
   methods: {
     getData() {
+      this.activity_name = this.$route.query.activity_name
       axios
         .get("/api/admin/signed/getQRCode", {
           params: { token: this.$route.query.token }
@@ -35,10 +36,23 @@ export default {
     }
   },
   mounted() {
-    this.getData();
+    setInterval("getData()",10000)
   }
 };
 </script>
 
 <style scoped>
+.code{
+  background-color: #fff;
+  background-size: cover;
+  height:100%;
+  position: fixed;
+  width:100%;
+}
+.img{
+  text-align: center;
+  margin-top:160px;
+  margin-left: 5%;
+  
+}
 </style>
