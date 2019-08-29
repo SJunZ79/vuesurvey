@@ -49,8 +49,8 @@
           <br />
           <p class="inline-block">志愿时证明材料：{{ volunteer_prove }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <el-button type="primary" icon="el-icon-view" @click="getVolun();dialogTable=true">预览数据</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <el-dialog title="图片预览" :visible.sync="dialogTable" width="700px">
-            <el-table :data="volunteerData" height="250" border style="width: 100%">
+          <el-dialog title="预览数据" :visible.sync="dialogTable" width="700px">
+            <el-table :data="volunteerData" height="250" border style="width: 100%;height:600px;">
               <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
               <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
               <el-table-column prop="stuClass" label="班级"></el-table-column>
@@ -61,8 +61,8 @@
           <br />
           <p class="inline-block">活动分证明材料：{{ activity_prove }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <el-button type="primary" icon="el-icon-view" @click="getActivity();Table=true">预览数据</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <el-dialog title="图片预览" :visible.sync="Table" :width="width">
-            <el-table :data="activityData" height="250" border style="width: 100%">
+          <el-dialog title="预览数据" :visible.sync="Table" :width="width">
+            <el-table :data="activityData" height="250" border style="width: 100%;height:600px;">
               <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
               <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
               <el-table-column prop="stuClass" label="班级"></el-table-column>
