@@ -22,17 +22,19 @@
         </div>
         <div class="text item">
           <p class="inline-block">活动材料：{{ material }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <el-button
-            type="primary"
-            icon="el-icon-view"
-            @click="getZip();dialogVisible = true"
-          >预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <el-dialog title="图片预览" :visible.sync="dialogVisible" :width="width+'px'">
-          <el-carousel :interval="4000" :height="bannerHeight+'px'">
-            <el-carousel-item v-for="item in images" :key="item.contentType">
-              <img ref="bannerHeight" :src="'data:image/jpeg;base64,'+item.base64Str" @load="onLoad" />
-            </el-carousel-item>
-          </el-carousel>
+          <el-button type="primary" icon="el-icon-view" @click="getZip();dialogVisible = true">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-dialog title="图片预览" :visible.sync="dialogVisible" width="600px">
+            <el-carousel :interval="4000" height="700px" indicator-position="none">
+              <el-carousel-item v-for="item in images" :key="item.contentType">
+                <viewer :images="images">
+                <el-image
+                  :src="'data:image/jpeg;base64,'+item.base64Str"
+                  fit="contain"
+                  style="width:500px;height:700px;"
+                ></el-image>
+                </viewer>
+              </el-carousel-item>
+            </el-carousel>
           </el-dialog>
           <!--
           <el-dialog title="图片预览" :visible.sync="dialogTableVisible" :width="width">
@@ -50,7 +52,7 @@
           <p class="inline-block">志愿时证明材料：{{ volunteer_prove }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <el-button type="primary" icon="el-icon-view" @click="getVolun();dialogTable=true">预览数据</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <el-dialog title="预览数据" :visible.sync="dialogTable" width="700px">
-            <el-table :data="volunteerData" height="250" border style="width: 100%;height:600px;">
+            <el-table :data="volunteerData" height="250" border style="width: 100%;height:700px;">
               <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
               <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
               <el-table-column prop="stuClass" label="班级"></el-table-column>
@@ -62,7 +64,7 @@
           <p class="inline-block">活动分证明材料：{{ activity_prove }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <el-button type="primary" icon="el-icon-view" @click="getActivity();Table=true">预览数据</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <el-dialog title="预览数据" :visible.sync="Table" width="700px">
-            <el-table :data="activityData" height="250" border style="width: 100%;height:600px;">
+            <el-table :data="activityData" height="250" border style="width: 100%;height:700px;">
               <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
               <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
               <el-table-column prop="stuClass" label="班级"></el-table-column>
@@ -84,27 +86,24 @@ export default {
       material: this.$route.query.material,
       volunteer_prove: this.$route.query.volunteer_time,
       activity_prove: this.$route.query.activity_prove,
-      width: "",
-      bannerHeight:"",
+      
       dialogTableVisible: false,
       images: [],
       volunteerData: [],
       activityData: [],
       dialogTable: false,
       Table: false,
-      dialogVisible:false,
-
+      dialogVisible: false
     };
   },
   methods: {
-    onLoad() {
-      
+    /*onLoad() {
       this.$nextTick(() => {
-        this.width=this.$refs.bannerHeight[0].width
-        this.bannerHeight=this.$refs.bannerHeight[0].height
+        this.width = this.$refs.bannerHeight[0].width;
+        this.bannerHeight = this.$refs.bannerHeight[0].height;
         console.log(this.$refs.bannerHeight[0].height);
-      })
-    },
+      });
+    },*/
     getZip() {
       axios
         .post("/api/admin/activity/getZipContent", {
@@ -149,14 +148,18 @@ export default {
       this.$router.push({ path: "/HelloWorld" });
     }
   },
-  mounted(){
+  /*mounted() {
     this.onLoad();
-    window.addEventListener('resize',() => {
-      this.width=this.$refs.bannerHeight[0].width
-      this.bannerHeight=this.$refs.bannerHeight[0].height
-      this.onLoad();
-    },false)
-  }
+    window.addEventListener(
+      "resize",
+      () => {
+        this.width = this.$refs.bannerHeight[0].width;
+        this.bannerHeight = this.$refs.bannerHeight[0].height;
+        this.onLoad();
+      },
+      false
+    );
+  }*/
 };
 </script>
 
