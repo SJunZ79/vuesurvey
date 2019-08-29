@@ -97,15 +97,15 @@ export default {
     };
   },
   methods: {
-    onLoad() {
-      /*
+    onLoad(e) {
+      
       const img = e.target;
       let width = 0;
       if (img.fileSize > 0 || (img.width > 1 && img.height > 1)) {
         width = img.width + 40;
       }
       this.width = width + "px";
-      */
+      
       this.$nextTick(() => {
         this.bannerHeight=this.$refs.bannerHeight[0].height
         console.log(this.$refs.bannerHeight[0].height);
