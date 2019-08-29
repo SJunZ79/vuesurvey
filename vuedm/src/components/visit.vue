@@ -61,7 +61,7 @@
           <br />
           <p class="inline-block">活动分证明材料：{{ activity_prove }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <el-button type="primary" icon="el-icon-view" @click="getActivity();Table=true">预览数据</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <el-dialog title="预览数据" :visible.sync="Table" :width="width">
+          <el-dialog title="预览数据" :visible.sync="Table" width="700px">
             <el-table :data="activityData" height="250" border style="width: 100%;height:600px;">
               <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
               <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
@@ -97,16 +97,10 @@ export default {
     };
   },
   methods: {
-    onLoad(e) {
-      
-      const img = e.target;
-      let width = 0;
-      if (img.fileSize > 0 || (img.width > 1 && img.height > 1)) {
-        width = img.width + 40;
-      }
-      this.width = width + "px";
+    onLoad() {
       
       this.$nextTick(() => {
+        this.width=this.$refs.bannerHeight[0].width
         this.bannerHeight=this.$refs.bannerHeight[0].height
         console.log(this.$refs.bannerHeight[0].height);
       })
@@ -158,6 +152,7 @@ export default {
   mounted(){
     this.onLoad();
     window.addEventListener('resize',() => {
+      this.width=this.$refs.bannerHeight[0].width
       this.bannerHeight=this.$refs.bannerHeight[0].height
       this.onLoad();
     },false)
