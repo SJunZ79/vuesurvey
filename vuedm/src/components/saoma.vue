@@ -20,8 +20,10 @@
           <el-input v-model="ruleForm.stuName"></el-input>
         </el-form-item>
         <el-form-item label="年级" prop="stuProfession">
-          <el-input v-model="ruleForm.stuProfession"></el-input>
-        </el-form-item>
+        <el-select v-model="ruleForm.stuProfession" placeholder="请选择年级">
+          <el-option v-for="item in data" :key="item" :value="item" :label="item"></el-option>
+        </el-select>
+      </el-form-item>
         <el-form-item label="专业班级" prop="stuClass">
           <el-input v-model="ruleForm.stuClass"></el-input>
         </el-form-item>
@@ -46,6 +48,7 @@ export default {
         stuProfession: "",
         stuClass: ""
       },
+      data:['2016','2017','2018','2019'],
       rules: {
         stuID: [{ required: true, message: "请输入学号", trigger: "blur" }],
         stuName: [{ required: true, message: "请输入姓名", trigger: "blur" }],
@@ -92,11 +95,11 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-    }
+    },
+    
   }
 };
 </script>
-
 
 <style scoped>
 .saoma{
@@ -128,5 +131,6 @@ export default {
   color: #fff;
   outline: 0;
 }
+
 
 </style>

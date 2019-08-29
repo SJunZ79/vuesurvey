@@ -26,9 +26,22 @@
                 >查看</router-link>
               </el-button>
               <el-button type="text" size="small">
-                <router-link :to="{path:'/edit', query : { activity_id:scope.row.id,material:scope.row.material,volunteer_time:scope.row.volunteer_time,activity_prove:scope.row.activity_prove}}">编辑</router-link>
+                <router-link
+                  :to="{path:'/edit', query : { activity_id:scope.row.id,activity_name:scope.row.name,material:scope.row.material,volunteer_time:scope.row.volunteer_time,activity_prove:scope.row.activity_prove}}"
+                >编辑</router-link>
               </el-button>
-              <el-button type="text" size="small">删除</el-button>
+              <el-button
+                type="text"
+                size="small"
+                @click="delVisible=true"
+              >删除</el-button>
+              <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
+                <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="delVisible = false">取 消</el-button>
+                  <el-button type="primary" @click.native.prevent="deleteRow(scope.$index, tableData)" >确 定</el-button>
+                </span>
+              </el-dialog>
             </template>
           </el-table-column>
         </el-table>
@@ -65,7 +78,8 @@ export default {
       istag: true,
       input: "",
       input21: "",
-      tableData: []
+      tableData: [],
+      delVisible:false
     };
   },
   methods: {
@@ -91,6 +105,9 @@ export default {
     },
     handleClick(row) {
       console.log(row);
+    },
+    deleteRow(index, rows) {
+      rows.splice(index, 1);
     },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 0) {
@@ -180,12 +197,13 @@ export default {
 };
 </script>
 
+<!--
 <style>
 .el-table th,
 .el-table tr {
   background: transparent;
-  color: #fff;
-  border: 1px solid #fff;
+  color: #000;
+  border: 1px solid #000;
 }
 .el-table,
 .el-table__expanded-cell {
@@ -194,6 +212,7 @@ export default {
   color: #000;
 }
 </style>
+-->
 <style scoped>
 a {
   text-decoration: none;
@@ -209,7 +228,6 @@ a {
   font-size: 1.2em;
   border-radius: 4px;
   border: 1px solid #000;
-  background-color: rgba(119, 136, 153, 0.5);
   color: #000;
   outline: 0;
 }

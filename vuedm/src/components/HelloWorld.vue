@@ -69,7 +69,7 @@ export default {
   height: 600px;
 }
 .el-header {
-  background-color:rgba(135,206,235,0.5);
+  background-color:rgba(30,144,255, 0.5);
 }
 .name {
   float: left;
@@ -80,11 +80,11 @@ export default {
 }
 .el-aside{
   height: 560px;
-  background-color:rgba(255,182,193,0.5);
+  background-color:rgba(0,191,255,0.5);
   border-right: 1px solid #fff;
 }
 .el-menu-vertical-demo{
-  background-color:rgba(255,182,193,0);
+  background-color:rgba(0,191,255,0);
   border-right: none;
 }
 .el-dropdown{

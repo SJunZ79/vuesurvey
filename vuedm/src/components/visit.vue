@@ -25,8 +25,16 @@
           <el-button
             type="primary"
             icon="el-icon-view"
-            @click="getZip();dialogTableVisible = true"
+            @click="getZip();dialogVisible = true"
           >预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-dialog title="图片预览" :visible.sync="dialogVisible" :width="width+'px'">
+          <el-carousel :interval="4000" :height="bannerHeight+'px'">
+            <el-carousel-item v-for="item in images" :key="item.contentType">
+              <img ref="bannerHeight" :src="'data:image/jpeg;base64,'+item.base64Str" @load="onLoad" />
+            </el-carousel-item>
+          </el-carousel>
+          </el-dialog>
+          <!--
           <el-dialog title="图片预览" :visible.sync="dialogTableVisible" :width="width">
             <img
               v-for="item in images"
@@ -35,12 +43,13 @@
               @load="onLoad"
             />
           </el-dialog>
+          -->
           <el-button type="primary" icon="el-icon-download">下载文档</el-button>
           <br />
           <br />
           <p class="inline-block">志愿时证明材料：{{ volunteer_prove }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <el-button type="primary" icon="el-icon-view" @click="dialogTable=true">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <el-dialog title="图片预览" :visible.sync="dialogTable" :width="width">
+          <el-button type="primary" icon="el-icon-view" @click="getVolun();dialogTable=true">预览数据</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-dialog title="图片预览" :visible.sync="dialogTable" width="700px">
             <el-table :data="volunteerData" height="250" border style="width: 100%">
               <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
               <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
@@ -51,7 +60,7 @@
           <br />
           <br />
           <p class="inline-block">活动分证明材料：{{ activity_prove }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-          <el-button type="primary" icon="el-icon-view" @click="Table=true">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <el-button type="primary" icon="el-icon-view" @click="getActivity();Table=true">预览数据</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <el-dialog title="图片预览" :visible.sync="Table" :width="width">
             <el-table :data="activityData" height="250" border style="width: 100%">
               <el-table-column prop="stuNum" label="学号" width="180"></el-table-column>
@@ -76,22 +85,31 @@ export default {
       volunteer_prove: this.$route.query.volunteer_time,
       activity_prove: this.$route.query.activity_prove,
       width: "",
+      bannerHeight:"",
       dialogTableVisible: false,
       images: [],
       volunteerData: [],
       activityData: [],
       dialogTable: false,
-      Table: false
+      Table: false,
+      dialogVisible:false,
+
     };
   },
   methods: {
-    onLoad(e) {
+    onLoad() {
+      /*
       const img = e.target;
       let width = 0;
       if (img.fileSize > 0 || (img.width > 1 && img.height > 1)) {
         width = img.width + 40;
       }
       this.width = width + "px";
+      */
+      this.$nextTick(() => {
+        this.bannerHeight=this.$refs.bannerHeight[0].height
+        console.log(this.$refs.bannerHeight[0].height);
+      })
     },
     getZip() {
       axios
@@ -109,8 +127,8 @@ export default {
       axios
         .post("/api/admin/activity/getDocParseData", {
           uuid: this.$route.query.volunteer_time_uuid,
-          file_type:1,
-          activity_id:this.$route.query.activity_id
+          file_type: 1,
+          activity_id: this.$route.query.activity_id
         })
         .then(response => {
           this.volunteerData = response.data.parse_data;
@@ -123,8 +141,8 @@ export default {
       axios
         .post("/api/admin/activity/getDocParseData", {
           uuid: this.$route.query.activity_prove_uuid,
-          file_type:0,
-          activity_id:this.$route.query.activity_id
+          file_type: 0,
+          activity_id: this.$route.query.activity_id
         })
         .then(response => {
           this.activityData = response.data.parse_data;
@@ -136,6 +154,13 @@ export default {
     fanhui() {
       this.$router.push({ path: "/HelloWorld" });
     }
+  },
+  mounted(){
+    this.onLoad();
+    window.addEventListener('resize',() => {
+      this.bannerHeight=this.$refs.bannerHeight[0].height
+      this.onLoad();
+    },false)
   }
 };
 </script>

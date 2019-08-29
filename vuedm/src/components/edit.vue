@@ -105,14 +105,14 @@
         upload_url: 'aaa',       // 随便填一个，但一定要有
         uploadForm: new FormData(),   // 一个formdata
         newform: {
-          expName: '',
+          expName: this.$route.query.activity_name,
           expSn: '',
         },
         isupload:'',
         isup:'',
         isu:'',
         rules: {
-        expName: [{ required: true, message: "请输入活动名称", trigger: "blur" }],
+        expName: [{ required: true, message: "请输入活动名称", trigger: "change" }],
         expSn: [
           {
             type: "string",
@@ -196,12 +196,12 @@
 
 <style>
 .el-form-item__label{
-  color:#fff;
+  color:#000;
 }
 </style>
 <style scoped>
 .el-header {
-  background-color:rgba(135,206,235,0.5);
+  background-color:rgba(30,144,255,0.5);
 }
 .name {
   float: left;
@@ -212,7 +212,7 @@
   float: right;
 }
 .el-avatar {
-  background-color:rgba(255,182,193,0.5);
+  background-color:rgba(135,206,235,0.5);
 }
 .el-dropdown-link {
   cursor: pointer;

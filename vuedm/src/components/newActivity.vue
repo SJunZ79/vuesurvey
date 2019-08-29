@@ -142,6 +142,6 @@
 
 <style >
 .el-form-item__label{
-  color:#fff;
+  color:#000;
 }
 </style>
