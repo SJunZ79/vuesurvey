@@ -11,6 +11,7 @@ import Activate from "../components/Activate";
 import Loginbacks from "../components/Loginbacks";
 import FrontActivate from "../components/FrontActivate";
 import button from "../components/button";
+import newcode from "../components/newcode";
 Vue.use(Router)
 
 export default new Router({
@@ -77,6 +78,11 @@ export default new Router({
       path:'/button',
       name:'button',
       component:button
+    },
+    {
+      path:'/newcode',
+      name:'newcode',
+      component:newcode
     },
     //登陆注册
     {

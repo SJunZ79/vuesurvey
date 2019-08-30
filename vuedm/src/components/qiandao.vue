@@ -109,7 +109,7 @@ export default {
             this.validaty = response.data.validaty;
             console.log(response);
             this.$router.push({
-              path: "/button",
+              path: "/newcode",
               query: { token: this.token , activity_name: this.getName}
             });
           }
@@ -130,4 +130,5 @@ a {
 .router-link-active {
   text-decoration: none;
 }
+
 </style>

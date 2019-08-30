@@ -66,7 +66,15 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-container{
-  height: 600px;
+      background: #fff no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: page;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
 }
 .el-header {
   background-color:rgba(30,144,255, 0.5);
@@ -79,7 +87,7 @@ export default {
   border-right:1px solid #fff;
 }
 .el-aside{
-  height: 560px;
+  margin-bottom: 0px;
   background-color:rgba(0,191,255,0.5);
   border-right: 1px solid #fff;
 }

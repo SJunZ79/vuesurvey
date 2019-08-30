@@ -26,13 +26,14 @@
           <el-dialog title="图片预览" :visible.sync="dialogVisible" width="600px">
             <el-carousel :interval="4000" height="700px" indicator-position="none">
               <el-carousel-item v-for="item in images" :key="item.contentType">
-                <viewer :images="images">
+                
                 <el-image
                   :src="'data:image/jpeg;base64,'+item.base64Str"
                   fit="contain"
                   style="width:500px;height:700px;"
+                  :preview-src-list="images"
                 ></el-image>
-                </viewer>
+                
               </el-carousel-item>
             </el-carousel>
           </el-dialog>
