@@ -17,11 +17,11 @@
             .then(res => {
               if (res.data.status === "200") {
                 this.$message.success("激活成功！");
-                setTimeout(()=>{this.$router.push('/loginbacks')},3000)
+                setTimeout(()=>{this.$router.push('/')},3000)
 
               } else {
                 this.$message.error("该邮箱尚未注册或者(激活码错误或者已经超时，请重新注册)！");
-                setTimeout(()=>{this.$router.push('/')},2000)
+                setTimeout(()=>{this.$router.push('/register')},2000)
               }
             });
         }

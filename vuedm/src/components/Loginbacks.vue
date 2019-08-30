@@ -56,11 +56,15 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary"  class="regbut" @click="goRegister()" style="width: 65%;margin-top: -26.5%;margin-left: 57%;font-size: 20px;position: absolute" round>未  注  册？</el-button>
+              <el-button type="primary"  class="regbut" @click="goRegister()" style="width: 65%;margin-top: -26.5%;margin-left: 57%;font-size: 20px;position: absolute" round>未  注  册 ？</el-button>
             </el-form-item>
 
           </el-form>
         </el-row>
+      </div>
+      <div class="otherl">
+        <span class="otherh">其它登录方式:</span>
+        <el-button type="primary"  class="olbut" @click="otherlog()" size="mini" plain circle><img id="logo" src="../assets/images/yilogo.png"></el-button>
       </div>
     </div>
   </div>
@@ -115,7 +119,7 @@
         if (!this.user.username) {
           this.$message.error("请输入用户名！");
           return;
-        } else if (!this.user.type) {
+        } else if (this.user.type!=0&this.user.type!=1&this.user.type!=2&this.user.type!=3&this.user.type!=4) {
           this.$message.error("请选择用户类型！");
           return;
         } else if (!this.user.password) {
@@ -154,9 +158,17 @@
             });
         }
       },
+      otherlog(){
+        axios.get("/api/oauth/yiban/getLoginURL").then(res => {
+          var logurl = res.data.data.login_url;
+          window.open(logurl);
+        });
+
+      },
       goRegister(){
         this.$router.push('/register');
       }
+
     }
   }
 </script>
@@ -252,6 +264,26 @@
   }
 </style>
 <style scoped>
+  .otherl{
+    margin-top: -5%;
+    margin-left: 16%;
+  }
+  #logo{
+    height: 28px;
+    width: 28px;
+    margin-top: -6%;
+  }
+  .olbut{
+    margin-top: 0.5%;
+    margin-left: 7.8%;
+    position: absolute;
+  }
+  .otherh{
+    font-size: 1.2em;
+    color: rgb(153, 153, 153);
+    margin-top: 1%;
+    position: absolute;
+  }
   .login {
     left: 0%;
     top: 0%;
@@ -271,7 +303,7 @@
     margin-right: 12%;
     margin-left: 60%;
     margin-top: 4%;
-    height: 60%;
+    height: 65%;
   }
   .logform{
     margin-top: 6.5%;

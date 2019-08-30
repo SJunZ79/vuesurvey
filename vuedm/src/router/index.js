@@ -12,6 +12,8 @@ import Loginbacks from "../components/Loginbacks";
 import FrontActivate from "../components/FrontActivate";
 import button from "../components/button";
 import newcode from "../components/newcode";
+import Redirect from "../components/Redirect";
+import BindEmail from "../components/BindEmail";
 Vue.use(Router)
 
 export default new Router({
@@ -99,6 +101,17 @@ export default new Router({
       path: '/frontActivate',
       name: 'FrontActivate',
       component: FrontActivate,
+    },
+    //易班登录
+    {
+      path: '/oauth/yiban/redirect',
+      name: 'Redirect',
+      component: Redirect,
+    },
+    {
+      path: '/bindEmail',
+      name: 'BindEmail',
+      component: BindEmail,
     }
   ]
 })
