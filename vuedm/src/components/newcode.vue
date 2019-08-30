@@ -40,7 +40,8 @@ export default {
       activity_name: "",
       srbase: "",
       validity: 0,
-      id: "",
+      codeid: "",
+      tableid:"",
       tableData: []
     };
   },
@@ -53,7 +54,8 @@ export default {
         })
         .then(response => {
           if (response.data.status === "201") {
-            clearInterval(this.id);
+            clearInterval(this.codeid);
+            clearInterval(this.tableid);
             this.$message.error("签到结束！");
           } else {
             console.log(response.data);
@@ -67,7 +69,7 @@ export default {
     },
     getTable() {
       axios
-        .get("/api//admin/signed/signInList", {
+        .get("/api/admin/signed/signInList", {
           params: { token: this.$route.query.token }
         })
         .then(response => {
@@ -84,7 +86,8 @@ export default {
         ).then(response => {
             if(response.data.status === "200"){
                 this.$message.success("请求成功！");
-                clearInterval(this.id);
+                clearInterval(this.codeid);
+                clearInterval(this.tableid);
             }else{
                 this.$message.error("请求失败！");
             }
@@ -95,7 +98,8 @@ export default {
   mounted() {
     this.getTable();
     this.getData();
-    this.id = setInterval(this.getData, 1000);
+    this.codeid = setInterval(this.getData, 1000);
+    this.tableid = setInterval(this.getTable,60000);
   }
 };
 </script>
