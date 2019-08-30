@@ -24,18 +24,20 @@
           <p class="inline-block">活动材料：{{ material }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <el-button type="primary" icon="el-icon-view" @click="getZip();dialogVisible = true">预览图片</el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <el-dialog title="图片预览" :visible.sync="dialogVisible" width="600px">
+            
             <el-carousel :interval="4000" height="700px" indicator-position="none">
               <el-carousel-item v-for="item in images" :key="item.contentType">
                 
                 <el-image
-                  :src="'data:image/jpeg;base64,'+item.base64Str"
+                  :src="item.base64Str"
                   fit="contain"
                   style="width:500px;height:700px;"
-                  :preview-src-list="images"
+                  :preview-src-list="images.base64Str"
                 ></el-image>
                 
               </el-carousel-item>
             </el-carousel>
+            
           </el-dialog>
           <!--
           <el-dialog title="图片预览" :visible.sync="dialogTableVisible" :width="width">
@@ -112,6 +114,9 @@ export default {
         })
         .then(response => {
           this.images = response.data.images;
+          this.images.forEach(item => {
+            item.base64Str = "data:image/jpeg;base64," + item.base64Str
+          })
         })
         .catch(function(error) {
           console.log("error");

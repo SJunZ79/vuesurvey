@@ -6,9 +6,9 @@
       </el-header>
       <el-main>
         <el-table :data="tableData" height="420px" border style="width: 100%;">
-          <el-table-column prop="date" label="日期" width="180"></el-table-column>
-          <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-          <el-table-column prop="address" label="地址"></el-table-column>
+          <el-table-column prop="stuID" label="学号" width="180"></el-table-column>
+          <el-table-column prop="stuName" label="姓名" width="180"></el-table-column>
+          <el-table-column prop="stuProfessionAndClass" label="班级"></el-table-column>
         </el-table>
       </el-main>
       <el-footer style="text-align:center;">
@@ -22,7 +22,7 @@
         </div>
         <br />
         <div class="codename">
-          <span>签到二维码 （1s刷新1次）</span>
+          <span>签到二维码</span>
         </div>
       </el-main>
       <el-footer class="btn">
@@ -122,7 +122,7 @@ export default {
 }
 .img {
   margin-top: 10%;
-  margin-left: 25%;
+  margin-left: 30%;
 }
 .codename {
   text-align: center;
